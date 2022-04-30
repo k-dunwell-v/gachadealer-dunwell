@@ -13,7 +13,9 @@ function App() {
         <CartWidget/>
       </NavBar>
 
-      <ItemListContainer greet="GachaDealer"/>
+      <ItemListContainer>
+      </ItemListContainer>
+
 
 
 
