@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"
 import { merch as merchandise } from "./merch"
-import ItemOfList from "./ItemOfList"
-import ItemList from "./ItemList"
-import Item from "./Item"
+import ItemDetail from "./ItemDetail"
 
-const ItemListContainer = () => {
+
+
+const ItemDetailContainer= () => {
+
+    let { id } = useParams()
+
+    id = id - 1
 
     const [merch, setMerch] = useState([])
 
@@ -13,13 +18,14 @@ const ItemListContainer = () => {
         const getMerch = new Promise ( (resolve, reject) => {
 
             setTimeout(() => {
-                resolve(merchandise)
-            }, 500)
+                resolve([merchandise[id]])
+            }, 2000)
 
         })
 
         getMerch.then( (result) => {
             setMerch(result)
+
         }).catch((e) => {
             console.error(e)
         })
@@ -28,13 +34,9 @@ const ItemListContainer = () => {
 
     return (
 
-        <div className="grid">
+        <div>
 
-            <ItemList className="left">
-                {merch.map ( merch => ItemOfList(merch.id, merch.img, merch.title, merch.price))}
-            </ItemList>
-
-            <Item/>
+            {merch.map ( merch => ItemDetail(merch.img, merch.title, merch.description, merch.specifications, merch.details, merch.price))}
 
         </div>
 
@@ -43,4 +45,5 @@ const ItemListContainer = () => {
     )
 }
 
-export default ItemListContainer
+
+export default ItemDetailContainer
