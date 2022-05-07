@@ -44,8 +44,8 @@ const ItemDetail= (img, title, description, specifications, details, price) => {
                                 <div className="mt-4">
                                     <ul role="list" className="pl-4 list-disc text-sm space-y-2">
 
-                                        <li className="text-gray-400"><span className="text-gray-600">{specifications}</span></li>
-
+                                    {specifications.map (specifications => <li className="text-gray-400"><span className="text-gray-600"> {specifications} </span></li>)}
+                                    
 
                                     </ul>
                                 </div>
