@@ -3,10 +3,9 @@ import { merch as merchandise } from "./merch"
 import { useParams } from "react-router-dom";
 import ItemOfList from "./ItemOfList"
 import ItemList from "./ItemList"
-import Item from "./Item"
 
 
-const ItemListContainer = () => {
+const ItemListContainer = (homeItem) => {
     
     let { category } = useParams()
 
@@ -33,19 +32,15 @@ const ItemListContainer = () => {
 
     return (
 
-        <div className="wrapper">
+        <>
 
             <ItemList className="main">
                 {merch.map ( merch => ItemOfList(merch.id, merch.img, merch.title, merch.price))}
             </ItemList>
 
-            <div className="right">
-                <Item/>
-                <Item/>
-                <Item/>
-            </div>
+            {homeItem.children}
 
-        </div>
+        </>
 
 
         
