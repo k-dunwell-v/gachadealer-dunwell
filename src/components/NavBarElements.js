@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 
 const NavBarElements = ({dir}) => {
 
     let arrow;
 
-    if (dir == "down") {
+    if (dir === "down") {
 
         arrow = <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
 
@@ -18,38 +19,46 @@ const NavBarElements = ({dir}) => {
         <>
             <li tabindex="0">
 
-                <a class="justify-between" href="/categories/">
+                <Link to="/categories/" className="justify-between">
                     Categories
                     {arrow}
-                </a>
+                </Link>
 
                 <ul class="p-2 bg-base-100">
 
                     <li>
-                        <a href="/categories/figures/">
+                        <Link to="/categories/figures/">
                             Figures
-                        </a>
+                        </Link>
                     </li>
 
                     <li>
-                        <a href="/categories/plushdolls/">
+                        <Link to="/categories/plushdolls/">
                             Plush Dolls
-                        </a>
+                        </Link>
                     </li>
 
                     <li>
-                        <a href="/categories/charactergoods/">
+                        <Link to="/categories/charactergoods/">
                             Character Goods
-                        </a>
+                        </Link>
                     </li>
 
                 </ul>
 
             </li>
 
-            <li><a>🇯🇵 ⇢ 🇨🇴</a></li>
+            <li>
+                <Link to="/order/">
+                    Order
+                </Link>
+            </li>
 
-            <li><a>Shipping</a></li>
+            <li>
+                <Link to="/shipping/">
+                    Shipping
+                </Link>
+            </li>
 
         </>
             
