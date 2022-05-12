@@ -37,9 +37,10 @@
   }
 }
 
-.grid {
+.wrapper {
   display: grid;
   grid-template-areas: 
-    'left right';
+    'main right';
   grid-gap: 10px;
 }
+

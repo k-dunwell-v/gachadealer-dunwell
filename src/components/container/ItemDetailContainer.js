@@ -9,8 +9,6 @@ const ItemDetailContainer= () => {
 
     let { id } = useParams()
 
-    id = id - 1
-
     const [merch, setMerch] = useState([])
 
     useEffect(() => {
@@ -18,7 +16,7 @@ const ItemDetailContainer= () => {
         const getMerch = new Promise ( (resolve, reject) => {
 
             setTimeout(() => {
-                resolve([merchandise[id]])
+                resolve([merchandise.find(item => item.id === id)])
             }, 2000)
 
         })
