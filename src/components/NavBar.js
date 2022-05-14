@@ -1,7 +1,6 @@
-import CartWidget from "./CartWidget"
 import NavBarElements from "./NavBarElements"
 
-const NavBar = () => {
+const NavBar = (CartWidget) => {
     return (
         
         <div class="navbar bg-base-100">
@@ -41,7 +40,7 @@ const NavBar = () => {
 
             <div className="navbar-end">
                 
-                <CartWidget/>
+                {CartWidget.children}
         
             </div>
 

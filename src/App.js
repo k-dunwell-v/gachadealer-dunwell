@@ -6,20 +6,30 @@ import ItemDetailContainer from './components/container/ItemDetailContainer';
 import Home from './components/Home';
 import Order from './components/pages/Order';
 import Shipping from './components/pages/Shipping';
-import CartProvider from './components/context/CartContext';
+import CartProvider, { CartViewContext } from './components/context/CartContext';
 import Cart from './components/Cart';
+import { useState } from 'react';
 
 
 function App() {
+
+  const [show, setShow] = useState(false)
+
+  const CartViewHandler = () => {
+  
+    setShow( currentState => {
+      return !currentState
+    })
+  
+  }
+
   return (
 
     <CartProvider>
 
       <BrowserRouter>
 
-        <NavBar/>
-
-        <Cart></Cart>
+        <Cart/>
 
         <Routes>
         
@@ -35,7 +45,7 @@ function App() {
 
           <Route path='/shipping/' element={<Shipping/>}/>
 
-          <Route path='/cart/' element={<Cart/>}/>
+          {/* <Route path='/cart/' element={<CheckOut/>}/> */}
 
         </Routes>
 

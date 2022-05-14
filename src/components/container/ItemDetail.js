@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { CartContext } from "../context/CartContext"
+import ItemCount from "../ItemCount"
 
 const ItemDetail = (id, img, title, description, specifications, details, price) => {
 
@@ -63,9 +64,10 @@ const ItemDetail = (id, img, title, description, specifications, details, price)
                                     </div>
                                 </div>
 
-                                <button type="submit" className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-2xl font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={() => {addToCart(id, title, price)}} >{price}</button>
+                                {/* <ItemCount></ItemCount> */}
 
-                                
+                                <button type="submit" className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-2xl font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={() => {addToCart(id, img, title, price)}} >{price}</button>
+
                             </div>
 
                             

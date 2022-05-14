@@ -1,6 +1,6 @@
 import { Children, createContext, useEffect, useState } from "react";
 
-function getLocal() {
+export function getLocal() {
 
     let localCart = localStorage.getItem("LocalCart")
     localCart = JSON.parse(localCart)
@@ -9,30 +9,37 @@ function getLocal() {
 }
 
 
-
-function PushLocal(cart) {
+export function PushLocal(cart) {
     localStorage.setItem("LocalCart", JSON.stringify(cart))
 }
 
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
 
-    
+
+export const CartViewContext = createContext(false)
+
+
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+
 
 export const CartContext = createContext({
 
     cart: [],
     addToCart: () => [],
     deleteFromCart: () => [],
-    clearCart: () => {}
+    clearCart: () => {},
 
 })
 
 
 const CartProvider = ( {children} ) => {
 
-    const [cart, setCart] = useState(getLocal())
+    const [cart, setCart] = useState(getLocal() || [])
 
     ///////////////////////////////////////// 
-    const addToCart = ( id, title, price ) => {
+    const addToCart = ( id, img, title, price ) => {
 
         const isInCart = cart.find(cartItem => cartItem.item["id"] === id)
 
@@ -54,7 +61,7 @@ const CartProvider = ( {children} ) => {
 
             setCart(currentCart => {
 
-                currentCart.push({item:{id:id, title: title, price: price}, quantity:1})
+                currentCart.push({item:{id:id, img: img, title: title, price: price}, quantity:1})
           
                 return currentCart.concat()
     
@@ -64,9 +71,9 @@ const CartProvider = ( {children} ) => {
 
         PushLocal(cart)
 
+
     }
     /////////////////////////////////////////
-
 
 
     const context = {
