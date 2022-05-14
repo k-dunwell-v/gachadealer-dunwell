@@ -17,7 +17,7 @@ const NavBarElements = ({dir}) => {
     return (
         
         <>
-            <li tabindex="0">
+            <li tabIndex="0">
 
                 <Link to="/categories/" className="justify-between">
                     Categories
