@@ -1,9 +1,9 @@
 import { createContext, Fragment, useContext, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
-import { CartViewContext, CartContext, getLocal } from './context/CartContext'
-import NavBar from './NavBar'
+import {CartContext, getLocal } from './context/CartContext'
 import { Link } from "react-router-dom"
+import ItemInCart from './ItemInCart'
 
 
 
@@ -11,21 +11,13 @@ const Cart = () => {
 
 	const products = getLocal() || []
 
-	const showState = useContext(CartViewContext)
-
-    const [open, setOpen] = useState(showState)
+	const {clearCart, swapShow, show} = useContext(CartContext)
 
     return (
       	<>
 
-			<NavBar>
-				<button onClick={() => setOpen(true)}>
-				<img className="btn btn-outline btn-sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAAa0lEQVRYhWNgGAUjHTAic958+PgfmS8iwM/IQGPARGsLyAJvPnz8jx4atAIDHgJY45hWvseWpgY8BFjwSVIrF+AL0QEPgVEHjDpg1AGjDsBbEtKjRhzwEBgFBGs7UtuJpKof8DQw6oBRMAoAJUkfkGzu3BkAAAAASUVORK5CYII="/>   
-				</button>
-			</NavBar>
-
-			<Transition.Root show={open} as={Fragment}>
-				<Dialog as="div" className="relative z-10" onClose={setOpen}>
+			<Transition.Root show={show} as={Fragment}>
+				<Dialog as="div" className="relative z-10" onClose={swapShow}>
 					<Transition.Child
 					as={Fragment}
 					enter="ease-in-out duration-500"
@@ -62,7 +54,7 @@ const Cart = () => {
 													<button
 														type="button"
 														className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-														onClick={() => setOpen(false)}
+														onClick={() => swapShow()}
 													>
 														<span className="sr-only">Close panel</span>
 														<XIcon className="h-6 w-6" aria-hidden="true" />
@@ -75,79 +67,70 @@ const Cart = () => {
 														
 														<ul role="list" className="-my-6 divide-y divide-gray-200">
 
-															{products.map((product) => (
-																
-																<li key={product["item"].id} className="flex py-6">
-																	<div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-																	<img
-																		src={product["item"].img}
-																		className="h-full w-full object-cover object-center"
-																	/>
-																	</div>
+															{products.length === 0 &&
 
-																	<div className="ml-4 flex flex-1 flex-col">
-																		<div>
+															<div className="mt-6 flex justify-center text-center text-lg text-gray-500">
+																<p>
+																	I'm feeling kinda lonely... {' '}
+																	<Link to="/categories"
+																	type="button"
+																	className="font-medium text-indigo-600 hover:text-indigo-500"
+																	onClick={() => swapShow()}>
+																		Wanna add some stuff? <span aria-hidden="true"> :)</span>
+																	</Link>
+																</p>
+															</div>}
 
-																			<div className="flex justify-between text-base font-medium text-gray-900">
-																				
-																				<h3>
-																					<Link to={"/item/" + product["item"].id}> {product["item"].title} </Link>
-																				</h3>
-
-																				<p className="ml-4">{product["item"].price}</p>
-																			</div>
-																			
-																		</div>
-
-																		<div className="flex flex-1 items-end justify-between text-sm">
-																			<p className="text-gray-500">Qty {product.quantity}</p>
-
-																			<div className="flex">
-																				<button
-																					type="button"
-																					className="font-medium text-indigo-600 hover:text-indigo-500">
-																					Remove
-																				</button>
-																			</div>
-
-																		</div>
-
-																	</div>
-																</li>
-
-															))}
+														  	{products.map(product => ItemInCart(product["item"].id, product["item"].img, product["item"].title, product["item"].price, product.quantity))}
 
 														</ul>
 													</div>
 												</div>
 											</div>
 
-											<div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-											<div className="flex justify-between text-base font-medium text-gray-900">
-												<p>Subtotal</p>
-												<p>$0</p>
-											</div>
-											<p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-											<div className="mt-6">
-												<Link
-												to="/cart/"
-												className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-												>
-												Checkout
-												</Link>
-											</div>
+
 											<div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-												<p>
-												or{' '}
+													
 												<button
 													type="button"
-													className="font-medium text-indigo-600 hover:text-indigo-500"
-													onClick={() => setOpen(false)}
-												>
-													Continue Shopping<span aria-hidden="true"> &rarr;</span>
+													className="text-lg text-red-600 hover:text-red-500"
+													onClick={() => clearCart()}>
+													Clear cart
 												</button>
-												</p>
+
 											</div>
+
+
+
+											<div className="border-t border-gray-200 py-6 px-4 sm:px-6">
+												<div className="flex justify-between text-base font-medium text-gray-900">
+													<p>Subtotal</p>
+													<p>$0</p>
+												</div>
+												<p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+												<div className="mt-6">
+													<Link
+													to="/cart/"
+													className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+													onClick={() => swapShow()}
+													>
+													Checkout
+													</Link>
+												</div>
+
+												<div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+													<p>
+													or{' '}
+													<button
+														type="button"
+														className="font-medium text-indigo-600 hover:text-indigo-500"
+														onClick={() => swapShow()}
+													>
+														Continue Shopping<span aria-hidden="true"> &rarr;</span>
+													</button>
+													</p>
+												</div>
+
 											</div>
 										</div>
 									</Dialog.Panel>

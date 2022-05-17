@@ -13,23 +13,13 @@ import { useState } from 'react';
 
 function App() {
 
-  const [show, setShow] = useState(false)
-
-  const CartViewHandler = () => {
-  
-    setShow( currentState => {
-      return !currentState
-    })
-  
-  }
-
   return (
 
     <CartProvider>
 
       <BrowserRouter>
 
-        <Cart/>
+        <NavBar/>
 
         <Routes>
         

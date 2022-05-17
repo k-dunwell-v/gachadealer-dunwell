@@ -17,7 +17,7 @@ const ItemDetailContainer= () => {
 
             setTimeout(() => {
                 resolve([merchandise.find(item => item.id === id)])
-            }, 2000)
+            }, 500)
 
         })
 

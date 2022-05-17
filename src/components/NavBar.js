@@ -1,6 +1,12 @@
+import { useContext } from "react"
+import Cart from "./Cart"
+import { CartContext } from "./context/CartContext"
 import NavBarElements from "./NavBarElements"
 
-const NavBar = (CartWidget) => {
+const NavBar = () => {
+
+    const {swapShow} = useContext(CartContext)
+
     return (
         
         <div class="navbar bg-base-100">
@@ -40,7 +46,11 @@ const NavBar = (CartWidget) => {
 
             <div className="navbar-end">
                 
-                {CartWidget.children}
+                <button onClick={() => swapShow()}>
+					<img className="btn btn-outline btn-sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAAa0lEQVRYhWNgGAUjHTAic958+PgfmS8iwM/IQGPARGsLyAJvPnz8jx4atAIDHgJY45hWvseWpgY8BFjwSVIrF+AL0QEPgVEHjDpg1AGjDsBbEtKjRhzwEBgFBGs7UtuJpKof8DQw6oBRMAoAJUkfkGzu3BkAAAAASUVORK5CYII="/>   
+				</button>
+
+                <Cart/>
         
             </div>
 
