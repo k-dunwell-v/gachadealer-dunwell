@@ -9,9 +9,19 @@ import ItemInCart from './ItemInCart'
 
 const Cart = () => {
 
-	const products = getLocal() || []
+	const products = getLocal("LocalCart") || []
 
 	const {clearCart, swapShow, show} = useContext(CartContext)
+
+	function priceCounter(){
+		let total = 0
+
+		products.forEach((element) => {
+			total = total + parseInt(element.item.price);
+		});
+		
+		return total
+	}
 
     return (
       	<>
@@ -105,7 +115,7 @@ const Cart = () => {
 											<div className="border-t border-gray-200 py-6 px-4 sm:px-6">
 												<div className="flex justify-between text-base font-medium text-gray-900">
 													<p>Subtotal</p>
-													<p>$0</p>
+													<p>{"$" + priceCounter()}</p>
 												</div>
 												<p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
 												<div className="mt-6">

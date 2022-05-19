@@ -29,7 +29,9 @@ export const CartContext = createContext({
 
     cart: [],
     show: [],
+    inCart: [],
     swapShow: () => [],
+    inCartHandler: () => [],
     addToCart: () => [],
     deleteFromCart: () => [],
     clearCart: () => {},
@@ -41,6 +43,8 @@ const CartProvider = ( {children} ) => {
 
     const [cart, setCart] = useState(getLocal() || [])
     const [show, setShow] = useState(false)
+    const [inCart, setInCart] = useState(0)
+
 
     /////////////////////////////////////////
     const swapShow = () => {
@@ -49,73 +53,62 @@ const CartProvider = ( {children} ) => {
     /////////////////////////////////////////
 
 
+    /////////////////////////////////////////
+    const inCartHandler = () => {
+
+        let total = 0
+
+        cart.forEach((element) => {
+            total = total + parseInt(element.quantity);
+        });
+
+        setInCart(total)
+
+    }
+
+    /////////////////////////////////////////
+
+
     ///////////////////////////////////////// 
     const addToCart = ( {item, quantity} ) => {
 
         const {id, img, title, price} = item
+    
+            if (quantity > 0) {
 
-        Swal.fire({
-            title: 'Adding ' + title + ' to cart...',
-            imageUrl: img,
-            imageWidth: '200px',
-            imageHeight: '200px',
-            input: 'number',
-            inputValue: 1,
-            inputPlaceholder: 'Select quantity',
-            confirmButtonText: "Add to cart",
-            showCancelButton: true,
-    
-            inputValidator: (quantity) => {
-    
-                return new Promise((resolve) => {
-    
-                    if (quantity > 0) {
+                const isInCart = cart.find(cartItem => cartItem.item["id"] === id)
 
-                        const isInCart = cart.find(cartItem => cartItem.item["id"] === id)
+                if (isInCart) {
+        
+                    const index = cart.findIndex((cartItem => cartItem.item["id"] === id))
+        
+                    setCart(currentCart => {
+        
+                        let oldQuantity = currentCart[index].quantity
+                        let oldPrice = currentCart[index].item.price
 
-                        if (isInCart) {
-                
-                            const index = cart.findIndex((cartItem => cartItem.item["id"] === id))
-                
-                            setCart(currentCart => {
-                
-                                let oldQuantity = currentCart[index].quantity
-
-                                currentCart[index].quantity = parseInt(oldQuantity) + parseInt(quantity)
-                
-                                return currentCart.concat()
-                    
-                            })
-                
-                        }else{
-                
-                            setCart(currentCart => {
-                
-                                currentCart.push({item:{id:id, img: img, title: title, price: price}, quantity:quantity})
-                        
-                                return currentCart.concat()
-                    
-                            })
-                
-                        }
-                
-                        PushLocal(cart)
-                        swapShow()
-                        resolve()
-                        
+                        currentCart[index].quantity = parseInt(oldQuantity) + parseInt(quantity)
+                        currentCart[index].item.price = parseInt(oldPrice) + parseInt(price)
+        
+                        return currentCart.concat()
+            
+                    })
+        
+            }else{
+        
+                setCart(currentCart => {
     
-    
-                    } else {
-                        resolve('You need to add more than that :)')
-                        
-                    }
+                    currentCart.push({item:{id:id, img: img, title: title, price: price}, quantity:quantity})
+            
+                    return currentCart.concat()
+        
                 })
+    
             }
-        })
+    
+            PushLocal(cart)
 
-
-
-
+        }
 
     }
     /////////////////////////////////////////
@@ -152,7 +145,9 @@ const CartProvider = ( {children} ) => {
     const context = {
         cart,
         show,
+        inCart,
         swapShow,
+        inCartHandler,
         addToCart,
         deleteFromCart,
         clearCart

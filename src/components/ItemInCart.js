@@ -22,7 +22,7 @@ const ItemInCart = (id, img, title, price, quantity) => {
                             <Link to={"/item/" + id}> {title} </Link>
                         </h3>
 
-                        <p className="ml-4">{price}</p>
+                        <p className="ml-4">{"$" + price}</p>
                     </div>
                         
                     </div>
