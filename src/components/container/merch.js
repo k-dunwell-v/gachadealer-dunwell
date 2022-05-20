@@ -172,7 +172,7 @@ export const merch = [
     },
 
     {
-        id: "8",
+        id: "9",
 
         img: "https://img.amiami.com/images/product/main/182/FIGURE-039245.jpg",
 

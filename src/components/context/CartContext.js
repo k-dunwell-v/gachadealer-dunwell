@@ -34,6 +34,7 @@ export const CartContext = createContext({
     inCartHandler: () => [],
     isInCart:() => [],
     addToCart: () => [],
+    priceCounter: () => [],
     deleteFromCart: () => [],
     clearCart: () => {},
 
@@ -119,6 +120,19 @@ const CartProvider = ( {children} ) => {
 
 
     /////////////////////////////////////////
+    const priceCounter = () => {
+		let total = 0
+
+		cart.forEach((element) => {
+			total = total + parseInt(element.item.price);
+		});
+		
+		return total
+	}
+    /////////////////////////////////////////
+
+
+    /////////////////////////////////////////
     const deleteFromCart = ( id ) => {
 
         const index = isInCart(id)
@@ -154,6 +168,7 @@ const CartProvider = ( {children} ) => {
         inCartHandler,
         isInCart,
         addToCart,
+        priceCounter,
         deleteFromCart,
         clearCart
 

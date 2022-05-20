@@ -9,19 +9,9 @@ import ItemInCart from './ItemInCart'
 
 const Cart = () => {
 
-	const products = getLocal("LocalCart") || []
+	const {clearCart, swapShow, show, cart, priceCounter} = useContext(CartContext)
 
-	const {clearCart, swapShow, show} = useContext(CartContext)
 
-	function priceCounter(){
-		let total = 0
-
-		products.forEach((element) => {
-			total = total + parseInt(element.item.price);
-		});
-		
-		return total
-	}
 
     return (
       	<>
@@ -77,7 +67,7 @@ const Cart = () => {
 														
 														<ul role="list" className="-my-6 divide-y divide-gray-200">
 
-															{products.length === 0 &&
+															{cart.length === 0 &&
 
 															<div className="mt-6 flex justify-center text-center text-lg text-gray-500">
 																<p>
@@ -91,7 +81,7 @@ const Cart = () => {
 																</p>
 															</div>}
 
-														  	{products.map(product => ItemInCart(product["item"].id, product["item"].img, product["item"].title, product["item"].price, product.quantity))}
+														  	{cart.map(product => ItemInCart(product["item"].id, product["item"].img, product["item"].title, product["item"].price, product.quantity))}
 
 														</ul>
 													</div>
