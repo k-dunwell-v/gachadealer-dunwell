@@ -32,6 +32,7 @@ export const CartContext = createContext({
     inCart: [],
     swapShow: () => [],
     inCartHandler: () => [],
+    isInCart:() => [],
     addToCart: () => [],
     deleteFromCart: () => [],
     clearCart: () => {},
@@ -69,44 +70,49 @@ const CartProvider = ( {children} ) => {
     /////////////////////////////////////////
 
 
+    /////////////////////////////////////////
+    const isInCart = ( id ) => {
+
+       const index = cart.findIndex((cartItem => cartItem.item["id"] === id))
+       console.log(index)
+
+       return index
+    }
+    
+    /////////////////////////////////////////
+
+
     ///////////////////////////////////////// 
     const addToCart = ( {item, quantity} ) => {
-    
-            if (quantity > 0) {
 
-                const isInCart = cart.find(cartItem => cartItem.item["id"] === item.id)
+        const index = isInCart(item.id)
 
-                if (isInCart) {
-        
-                    const index = cart.findIndex((cartItem => cartItem.item["id"] === item.id))
-        
-                    setCart(currentCart => {
-        
-                        let oldQuantity = currentCart[index].quantity
-                        let oldPrice = currentCart[index].item.price
+        if (index > -1) {
 
-                        currentCart[index].quantity = parseInt(oldQuantity) + parseInt(quantity)
-                        currentCart[index].item.price = parseInt(oldPrice) + parseInt(item.price)
-        
-                        return currentCart.concat()
-            
-                    })
-        
-            }else{
-        
-                setCart(currentCart => {
-    
-                    currentCart.push({item:{id:item.id, img: item.img, title: item.title, price: item.price}, quantity:quantity})
-            
-                    return currentCart.concat()
-        
-                })
-    
-            }
-    
-            PushLocal(cart)
+            setCart(currentCart => {
 
+                let oldQuantity = currentCart[index].quantity
+                let oldPrice = currentCart[index].item.price
+
+                currentCart[index].quantity = parseInt(oldQuantity) + parseInt(quantity)
+                currentCart[index].item.price = parseInt(oldPrice) + parseInt(item.price)
+
+                return currentCart.concat()
+    
+            })
+
+        }else{
+
+            setCart(currentCart => {
+
+                currentCart.push({item:{id:item.id, img: item.img, title: item.title, price: item.price}, quantity:quantity})
+        
+                return currentCart.concat()
+
+            })
         }
+
+        PushLocal(cart)
 
     }
     /////////////////////////////////////////
@@ -115,7 +121,7 @@ const CartProvider = ( {children} ) => {
     /////////////////////////////////////////
     const deleteFromCart = ( id ) => {
 
-        const index = cart.findIndex((cartItem => cartItem.item["id"] === id))
+        const index = isInCart(id)
 
         setCart(currentCart => {
             currentCart.splice(index, 1)
@@ -146,6 +152,7 @@ const CartProvider = ( {children} ) => {
         inCart,
         swapShow,
         inCartHandler,
+        isInCart,
         addToCart,
         deleteFromCart,
         clearCart
