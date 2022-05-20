@@ -71,16 +71,14 @@ const CartProvider = ( {children} ) => {
 
     ///////////////////////////////////////// 
     const addToCart = ( {item, quantity} ) => {
-
-        const {id, img, title, price} = item
     
             if (quantity > 0) {
 
-                const isInCart = cart.find(cartItem => cartItem.item["id"] === id)
+                const isInCart = cart.find(cartItem => cartItem.item["id"] === item.id)
 
                 if (isInCart) {
         
-                    const index = cart.findIndex((cartItem => cartItem.item["id"] === id))
+                    const index = cart.findIndex((cartItem => cartItem.item["id"] === item.id))
         
                     setCart(currentCart => {
         
@@ -88,7 +86,7 @@ const CartProvider = ( {children} ) => {
                         let oldPrice = currentCart[index].item.price
 
                         currentCart[index].quantity = parseInt(oldQuantity) + parseInt(quantity)
-                        currentCart[index].item.price = parseInt(oldPrice) + parseInt(price)
+                        currentCart[index].item.price = parseInt(oldPrice) + parseInt(item.price)
         
                         return currentCart.concat()
             
@@ -98,7 +96,7 @@ const CartProvider = ( {children} ) => {
         
                 setCart(currentCart => {
     
-                    currentCart.push({item:{id:id, img: img, title: title, price: price}, quantity:quantity})
+                    currentCart.push({item:{id:item.id, img: item.img, title: item.title, price: item.price}, quantity:quantity})
             
                     return currentCart.concat()
         
