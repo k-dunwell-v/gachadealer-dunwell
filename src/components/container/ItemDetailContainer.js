@@ -34,7 +34,7 @@ const ItemDetailContainer= () => {
 
         <div>
 
-            {merch.map ( merch => ItemDetail(merch.id, merch.img, merch.title, merch.description, merch.specifications, merch.details, merch.price))}
+            {merch.map ( merch => ItemDetail(merch.id, merch.img, merch.title, merch.description, merch.specifications, merch.details, merch.price, merch.stock))}
 
         </div>
 

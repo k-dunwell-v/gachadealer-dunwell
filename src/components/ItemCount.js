@@ -5,12 +5,12 @@ const ItemCount = ({title, img, price, stock, quantity, onAdd}) => {
 	const [count, setCount] = useState(quantity)
 
 	function restar() {
-		setCount(currentState => currentState - 1)
+		count > 0 && setCount(currentState => currentState - 1)
 	}
 
 	function sumar() {
-		setCount(currentState => currentState + 1)
-
+		count < stock && setCount(currentState => currentState + 1)
+		console.log(stock)
 	}
 
 
