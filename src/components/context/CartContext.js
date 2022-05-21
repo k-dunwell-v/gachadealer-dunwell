@@ -1,5 +1,5 @@
-import { Children, createContext, useEffect, useState } from "react";
-import Swal from 'sweetalert2'
+import { createContext, useState } from "react";
+
 
 export function getLocal() {
 
@@ -74,10 +74,17 @@ const CartProvider = ( {children} ) => {
     /////////////////////////////////////////
     const isInCart = ( id ) => {
 
-       const index = cart.findIndex((cartItem => cartItem.item["id"] === id))
-       console.log(index)
+        const index = cart.findIndex((cartItem => cartItem.item["id"] === id))
+        let quantity = 0
 
-       return index
+        if (index > -1) {
+            quantity = cart[index].quantity
+        }
+
+        const result = {index: index, currentQuantity: quantity}
+
+        return result
+
     }
     
     /////////////////////////////////////////
@@ -86,17 +93,17 @@ const CartProvider = ( {children} ) => {
     ///////////////////////////////////////// 
     const addToCart = ( {item, quantity} ) => {
 
-        const index = isInCart(item.id)
+        const { index } = isInCart(item.id)
 
         if (index > -1) {
 
             setCart(currentCart => {
 
                 let oldQuantity = currentCart[index].quantity
-                let oldPrice = currentCart[index].item.price
+                let oldPrice = currentCart[index].item.price / oldQuantity
 
-                currentCart[index].quantity = parseInt(oldQuantity) + parseInt(quantity)
-                currentCart[index].item.price = parseInt(oldPrice) + parseInt(item.price)
+                currentCart[index].quantity = quantity
+                currentCart[index].item.price = oldPrice * quantity
 
                 return currentCart.concat()
     
@@ -135,15 +142,14 @@ const CartProvider = ( {children} ) => {
     /////////////////////////////////////////
     const deleteFromCart = ( id ) => {
 
-        const index = isInCart(id)
+        const { index } = isInCart(id)
 
         setCart(currentCart => {
             currentCart.splice(index, 1)
+            PushLocal(cart)
             return currentCart.concat()
-
+        
         })
-
-        PushLocal(cart)
 
 
     }

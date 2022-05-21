@@ -43,12 +43,10 @@ const NavBar = () => {
             </div>
 
             <div className="navbar-end">
-                <label tabindex="0" class="btn btn-ghost btn-circle">
-                    <div class="indicator">
-                        <CartWidget/>
-                        <Cart/>
-                    </div>
-                </label>  
+
+                <CartWidget/>
+
+                <Cart/>
         
             </div>
 

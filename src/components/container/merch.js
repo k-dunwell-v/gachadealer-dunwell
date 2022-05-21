@@ -13,7 +13,7 @@ export const merch = [
 
         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
 
-        price: "15",
+        price: 15,
 
         category: "plushdolls",
 
@@ -34,7 +34,7 @@ export const merch = [
 
         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
 
-        price: "15",
+        price: 15,
 
         category: "plushdolls",
 
@@ -55,7 +55,7 @@ export const merch = [
 
         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
 
-        price: "15",
+        price: 15,
 
         category: "plushdolls",
 
@@ -76,7 +76,7 @@ export const merch = [
 
         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
 
-        price: "15",
+        price: 15,
 
         category: "plushdolls",
 
@@ -97,7 +97,7 @@ export const merch = [
 
         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
 
-        price: "15",
+        price: 15,
 
         category: "charactergoods",
 
@@ -118,7 +118,7 @@ export const merch = [
 
         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
 
-        price: "35",
+        price: 35,
         
         category: "charactergoods",
 
@@ -139,7 +139,7 @@ export const merch = [
 
         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
 
-        price: "35",
+        price: 35,
         
         category: "charactergoods",
 
@@ -160,7 +160,7 @@ export const merch = [
 
         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
 
-        price: "70",
+        price: 70,
 
         category: "plushdolls",
 
@@ -181,7 +181,7 @@ export const merch = [
 
         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
 
-        price: "50",
+        price: 50,
 
         category: "figures",
 
@@ -202,7 +202,7 @@ export const merch = [
 
         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
 
-        price: "50",
+        price: 50,
 
         category: "figures",
 
@@ -224,7 +224,7 @@ export const merch = [
 
         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
 
-        price: "100",
+        price: 100,
 
         category: "figures",
 
@@ -245,7 +245,7 @@ export const merch = [
 
         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
 
-        price: "120",
+        price: 120,
 
         category: "figures",
 

@@ -1,43 +1,25 @@
-import { useContext, useState } from "react"
-import Swal from "sweetalert2"
+import { useContext } from "react"
 import { CartContext } from "../context/CartContext"
 import ItemCount from "../ItemCount"
 
 
-const ItemDetail = (id, img, title, description, specifications, details, price) => {
+const ItemDetail = (id, img, title, description, specifications, details, price, stock) => {
 
-    const { swapShow, addToCart } = useContext(CartContext)
+    const { swapShow, addToCart, isInCart, deleteFromCart } = useContext(CartContext)
 
-    function onAdd() {
+    const { index, currentQuantity } = isInCart(id)
 
-        Swal.fire({
-            title: 'Adding ' + title + ' to cart...',
-            imageUrl: img,
-            imageWidth: '200px',
-            imageHeight: '200px',
-            input: 'number',
-            inputValue: 1,
-            inputPlaceholder: 'Select quantity',
-            confirmButtonText: "Add to cart",
-            showCancelButton: true,
+    function onAdd(quantity) {
+
+        if (quantity > 0) {
+
+            const updatedPrice = parseInt(price) * quantity
+            addToCart({item:{id:id, img: img, title: title, price: updatedPrice}, quantity:quantity})
+
+        }else{ index > -1 && deleteFromCart(id) }
         
-            inputValidator: (quantity) => {
-    
-                return new Promise((resolve) => {
-    
-                    if (quantity > 0) {
-                        price = parseInt(price) * parseInt(quantity)
-                        addToCart({item:{id:id, img: img, title: title, price: price}, quantity:quantity})
-                        swapShow()
-                        resolve()
-    
-                    } else {
-                        resolve('You need to add more than that :)')
-                        
-                    }
-                })
-            }
-        })
+        swapShow()
+        
     }
 
     return (
@@ -98,7 +80,7 @@ const ItemDetail = (id, img, title, description, specifications, details, price)
                                     </div>
                                 </div>
 
-                                <ItemCount price={price} onAdd={onAdd}/>
+                                <ItemCount price={price} stock={stock} quantity={currentQuantity} onAdd={onAdd}/>
 
                             </div>
 
