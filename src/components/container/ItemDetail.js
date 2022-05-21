@@ -80,7 +80,7 @@ const ItemDetail = (id, img, title, description, specifications, details, price,
                                     </div>
                                 </div>
 
-                                <ItemCount price={price} stock={stock} quantity={currentQuantity} onAdd={onAdd}/>
+                                <ItemCount title={title} img={img} price={price} stock={stock} quantity={currentQuantity} onAdd={onAdd}/>
 
                             </div>
 

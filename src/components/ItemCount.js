@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const ItemCount = ({price, stock, quantity, onAdd}) => {
+const ItemCount = ({title, img, price, stock, quantity, onAdd}) => {
 
 	const [count, setCount] = useState(quantity)
 
@@ -22,8 +22,8 @@ const ItemCount = ({price, stock, quantity, onAdd}) => {
 
 			<div class="modal modal-bottom sm:modal-middle">
 				<div class="modal-box">
-					<h3 class="font-bold text-lg">Congratulations random Interner user!</h3>
-					<p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+					<h3 class="font-bold text-lg">{"You're adding '" + title + "' to the cart..."} </h3>
+					<img src={img} className="w-full h-full object-center object-cover"/>
 
 					<div class="modal-action place-content-center">
 
