@@ -34,7 +34,7 @@ const ItemCount = ({price, stock, quantity, onAdd}) => {
 					</div>
 
 					<div class="modal-action">
-						<label for="my-modal-6" class="btn" onClick={() => onAdd(count)}>Done</label>
+						<label for="my-modal-6" class="btn" onClick={() => onAdd(count)}>Add to cart</label>
 					</div>
 
 				</div>
