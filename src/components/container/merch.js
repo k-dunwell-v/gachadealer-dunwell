@@ -17,6 +17,8 @@ export const merch = [
 
         category: "plushdolls",
 
+        stock: 10,
+
      },
 
     {
@@ -35,6 +37,8 @@ export const merch = [
         price: "15",
 
         category: "plushdolls",
+
+        stock: 10,
 
     },
 
@@ -55,6 +59,8 @@ export const merch = [
 
         category: "plushdolls",
 
+        stock: 10,
+
     },
 
     {
@@ -73,6 +79,8 @@ export const merch = [
         price: "15",
 
         category: "plushdolls",
+
+        stock: 10,
 
     },
 
@@ -93,6 +101,8 @@ export const merch = [
 
         category: "charactergoods",
 
+        stock: 15,
+
     },
 
     {
@@ -111,6 +121,8 @@ export const merch = [
         price: "35",
         
         category: "charactergoods",
+
+        stock: 1,
 
     },
 
@@ -131,6 +143,8 @@ export const merch = [
         
         category: "charactergoods",
 
+        stock: 2,
+
     },
 
     {
@@ -150,24 +164,28 @@ export const merch = [
 
         category: "plushdolls",
 
-     },
+        stock: 1,
+
+    },
 
     {
-         id: "8",
- 
-         img: "https://img.amiami.com/images/product/main/192/FIGURE-049072.jpg",
- 
-         title:"Nendoroid Ensemble Stars! Izumi Sena",
- 
-         description: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
- 
-         specifications: ["Nunc tristique diam magna", "Nunc tristique diam magna", "Curabitur id finibus augue", "Aenean id justo urna"],
- 
-         details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
- 
-         price: "50",
- 
-         category: "figures",
+        id: "8",
+
+        img: "https://img.amiami.com/images/product/main/192/FIGURE-049072.jpg",
+
+        title:"Nendoroid Ensemble Stars! Izumi Sena",
+
+        description: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
+
+        specifications: ["Nunc tristique diam magna", "Nunc tristique diam magna", "Curabitur id finibus augue", "Aenean id justo urna"],
+
+        details: "Vestibulum vitae euismod metus. Nunc tristique diam magna, a dignissim ante accumsan quis. Curabitur id finibus augue. Aenean id justo urna. Vestibulum scelerisque convallis velit eu lacinia.",
+
+        price: "50",
+
+        category: "figures",
+
+        stock: 2,
  
     },
 
@@ -187,6 +205,8 @@ export const merch = [
         price: "50",
 
         category: "figures",
+
+        stock: 2,
 
     },
     
@@ -208,6 +228,8 @@ export const merch = [
 
         category: "figures",
 
+        stock: 0,
+
     },
 
     {
@@ -226,6 +248,8 @@ export const merch = [
         price: "120",
 
         category: "figures",
+
+        stock: 0,
 
     },
 

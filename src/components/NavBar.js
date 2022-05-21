@@ -7,7 +7,7 @@ const NavBar = () => {
 
     return (
         
-        <div class="navbar bg-base-100">
+        <div class="navbar bg-base-100" data-theme="acid">
 
             <div class="navbar-start">
 
@@ -43,10 +43,12 @@ const NavBar = () => {
             </div>
 
             <div className="navbar-end">
-                
-                <CartWidget/>
-
-                <Cart/>
+                <label tabindex="0" class="btn btn-ghost btn-circle">
+                    <div class="indicator">
+                        <CartWidget/>
+                        <Cart/>
+                    </div>
+                </label>  
         
             </div>
 
