@@ -10,7 +10,6 @@ const ItemCount = ({title, img, stock, quantity, onAdd}) => {
 
 	function sumar() {
 		count < stock && setCount(currentState => currentState + 1)
-		console.log(stock)
 	}
 
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import ItemDetail from "./ItemDetail"
-import { collection, doc, getDoc, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 
 
@@ -20,7 +20,8 @@ const ItemDetailContainer= () => {
 
             if (result.exists()) {
 
-                setProduct(result.data())
+                setProduct([{"id":result.id, ... result.data()}])
+
             }
 
         })

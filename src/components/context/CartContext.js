@@ -95,6 +95,8 @@ const CartProvider = ( {children} ) => {
 
         const { index } = isInCart(item.id)
 
+        console.log(item)
+
         if (index > -1) {
 
             setCart(currentCart => {
