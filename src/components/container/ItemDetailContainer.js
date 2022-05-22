@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
-import { merch as merchandise } from "./merch"
 import ItemDetail from "./ItemDetail"
+import { collection, doc, getDoc, getDocs, getFirestore, query, where } from "firebase/firestore";
 
 
 
@@ -9,23 +9,20 @@ const ItemDetailContainer= () => {
 
     let { id } = useParams()
 
-    const [merch, setMerch] = useState([])
+    const [product, setProduct] = useState([])
 
     useEffect(() => {
         
-        const getMerch = new Promise ( (resolve, reject) => {
+        const db = getFirestore()
+        const products = doc( db, "productos", id )
 
-            setTimeout(() => {
-                resolve([merchandise.find(item => item.id === id)])
-            }, 500)
+        getDoc( products ).then( result => {
 
-        })
+            if (result.exists()) {
 
-        getMerch.then( (result) => {
-            setMerch(result)
+                setProduct(result.data())
+            }
 
-        }).catch((e) => {
-            console.error(e)
         })
 
     })
@@ -34,7 +31,7 @@ const ItemDetailContainer= () => {
 
         <div>
 
-            {merch.map ( merch => ItemDetail(merch.id, merch.img, merch.title, merch.description, merch.specifications, merch.details, merch.price, merch.stock))}
+            {product.map ( merch => ItemDetail(merch.id, merch.img, merch.title, merch.brand, merch.details, merch.price, merch.stock))}
 
         </div>
 

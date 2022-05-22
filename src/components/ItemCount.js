@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const ItemCount = ({title, img, price, stock, quantity, onAdd}) => {
+const ItemCount = ({title, img, stock, quantity, onAdd}) => {
 
 	const [count, setCount] = useState(quantity)
 
@@ -15,13 +15,15 @@ const ItemCount = ({title, img, price, stock, quantity, onAdd}) => {
 
 
 	return (
+		
 		<div data-theme="acid">
-			<label for="my-modal-6" className="mt-10 w-full bg-orange-500 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-2xl font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{"$" + price}</label>
 
-			<input type="checkbox" id="my-modal-6" class="modal-toggle" />
+			<label for="my-modal-4" className="mt-10 w-full bg-orange-500 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-2xl font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 cursor-pointer"> Add to cart </label>
 
-			<div class="modal modal-bottom sm:modal-middle">
-				<div class="modal-box">
+			<input type="checkbox" id="my-modal-4" class="modal-toggle" />
+
+			<label for="my-modal-4" class="modal modal-bottom sm:modal-middle">
+				<label class="modal-box relative" for="">
 					<h3 class="font-bold text-lg">{"You're adding '" + title + "' to the cart..."} </h3>
 					<img src={img} className="w-full h-full object-center object-cover"/>
 
@@ -34,12 +36,12 @@ const ItemCount = ({title, img, price, stock, quantity, onAdd}) => {
 					</div>
 
 					<div class="modal-action">
-						<label for="my-modal-6" class="btn" onClick={() => onAdd(count)}>Add to cart</label>
+						<label for="my-modal-4" class="btn" onClick={() => onAdd(count)}>Add to cart</label>
 					</div>
 
-				</div>
-			</div>
-			
+				</label>
+			</label>
+
 		</div>
 	)
 

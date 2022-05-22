@@ -1,32 +1,33 @@
 import { useEffect, useState } from "react";
-import { merch as merchandise } from "./merch"
 import { useParams } from "react-router-dom";
 import ItemOfList from "./ItemOfList"
 import ItemList from "./ItemList"
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 
 
 const ItemListContainer = (homeItem) => {
     
     let { category } = useParams()
 
-    const [merch, setMerch] = useState([])
+    const [products, setProducts] = useState([])
 
     useEffect(() => {
         
-        const getMerch = new Promise ( (resolve, reject) => {
+        const db = getFirestore()
+        
+        const productsCollection = category ? query(collection(db, "productos"), where("category", "==", category)) : collection(db, "productos")
 
-            setTimeout(() => {
-                resolve(category ? merchandise.filter(item => item.category === category) : merchandise)
-            }, 500)
+        getDocs( productsCollection ).then( snapshot => {
 
+            if (snapshot.size > 0) {
+
+                const merchandise = snapshot.docs.map(docs => ({ "id": docs.id, ... docs.data()}))
+
+                setProducts(merchandise) 
+
+            }
         })
 
-        getMerch.then( (result) => {
-            setMerch(result)
-
-        }).catch((e) => {
-            console.error(e)
-        })
 
     })
 
@@ -35,7 +36,7 @@ const ItemListContainer = (homeItem) => {
         <>
 
             <ItemList className="main">
-                {merch.map ( merch => ItemOfList(merch.id, merch.img, merch.title, merch.price))}
+                {products.map ( merch => <ItemOfList key={merch.id} item={merch}/>)}
             </ItemList>
 
             {homeItem.children}

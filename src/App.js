@@ -6,9 +6,8 @@ import ItemDetailContainer from './components/container/ItemDetailContainer';
 import Home from './components/Home';
 import Order from './components/pages/Order';
 import Shipping from './components/pages/Shipping';
-import CartProvider, { CartViewContext } from './components/context/CartContext';
-import Cart from './components/Cart';
-import { useState } from 'react';
+import CartProvider from './components/context/CartContext';
+import CheckOut from './components/CheckOut';
 
 
 function App() {
@@ -35,7 +34,7 @@ function App() {
 
           <Route path='/shipping/' element={<Shipping/>}/>
 
-          {/* <Route path='/cart/' element={<CheckOut/>}/> */}
+          <Route path='/cart/' element={<CheckOut/>}/>
 
         </Routes>
 
