@@ -36,7 +36,6 @@ const ItemInCart = (id, img, title, price, quantity) => {
 
                         <div className="flex">
                             <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500" onClick={() => deleteFromCart(id, img, title)}>
-
                                 Remove
                             </button>
                         </div>

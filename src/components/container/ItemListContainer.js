@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import ItemOfList from "./ItemOfList"
 import ItemList from "./ItemList"
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import Carousel from "./Carousel";
 
 
-const ItemListContainer = (homeItem) => {
+const ItemListContainer = ({categories}) => {
     
     let { category } = useParams()
 
@@ -35,11 +36,13 @@ const ItemListContainer = (homeItem) => {
 
         <>
 
+            {!categories && <Carousel/>}
+
             <ItemList className="main">
                 {products.map ( merch => <ItemOfList key={merch.id} item={merch}/>)}
             </ItemList>
 
-            {homeItem.children}
+            
 
         </>
 
