@@ -22,6 +22,17 @@ const ItemDetailContainer= () => {
 
                 setProduct([{"id":result.id, ... result.data()}])
 
+            }else{
+                setProduct([{
+                    "id":"000",
+                    "img": "https://dummyimage.com/900x900/ebebeb/8c8c8c.jpg&text=(」°ロ°)」",
+                    "title":"Huh?",
+                    "brand":"Huh?!",
+                    "details":"How did you get here?!	(・・;)ゞ",
+                    "price":"free",
+                    "stock":"0"
+
+                }])
             }
 
         })

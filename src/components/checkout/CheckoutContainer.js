@@ -14,15 +14,20 @@ const CheckoutContainer = () => {
 
             {cart.length === 0 ?
 
-            <div classNameName="mt-6 flex justify-center text-center text-lg text-gray-500">
-                <p>
-                    I'm feeling kinda lonely... {' '}
+            <div className="bg-neutral" style={{height: 700 + "px"}} data-theme="acid">
+
+                <div className="flex justify-center px-4 py-60 text-white text-2xl">
+                
+                    I'm feeling kinda lonely... {''}
+
                     <Link to="/categories"
                     type="button"
-                    classNameName="font-medium text-indigo-600 hover:text-indigo-500">
+                    className="font-medium text-primary hover:text-accent">
                         Wanna add some stuff? <span aria-hidden="true"> :)</span>
                     </Link>
-                </p>
+
+                </div>
+
             </div> : <Checkout/>}
 
         </>

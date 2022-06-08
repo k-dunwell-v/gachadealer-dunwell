@@ -1,48 +1,94 @@
+import { useState } from "react"
 
+const CheckoutForm = (cart) => {
 
+    const [customer, setCustomer] = useState({
+        name: "",
+        email: "",
+        confirm: "",
+        phone: "",
+        address: "",
+        detail: "",
+        city: "",
+        state: "",
+        country: "United States",
+        zip: ""
 
-const CheckoutForm = () => {
+    })
+
+    function setCustomerHandler(e) {
+        setCustomer({...customer, [e.target.name] : e.target.value});
+    }
+
+    const [tooltip, setTooltip] = useState("")
+
+    function submitHandler(e) {
+
+        if (customer.email === customer.confirm) {
+
+            let order = {customer, cart, order_date: new Date().toISOString().slice(0, 10), tracking: ""}
+            console.log(order)
+
+        }else{
+            setTooltip(currentTooltip => "tooltip tooltip-open tooltip-bottom tooltip-primary")
+            e.preventDefault()
+        }
+
+        
+    }
+
 
     return(
 
-        <div className="w-full bg-neutral text-neutral-content rounded-none">
+        <div className="w-full bg-neutral text-neutral-content rounded-none p-20">
 
-            <div className="card-body items-center text-center justify-start mt-20">
+            <div className="card-body items-center text-center justify-start">
     
                 <div className="leading-loose">
-                    <form className="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
+
+                    <form className="max-w-xl m-4 p-10 bg-white rounded shadow-xl" action="" onSubmit={(e) => submitHandler(e)}>
 
                         <div className="">
-                            <label className="block text-sm" for="cus_name">Name</label>
-                            <input className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="cus_name" name="cus_name" type="text" required="" placeholder="Full Name" aria-label="Name"/>
+                            <label className="block text-sm" for="cus_name">Personal Information</label>
+                            <input onChange={(e) => setCustomerHandler(e)} className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" name="name" type="text" required placeholder="Full Name"/>
+                        </div>
+
+                        <div className="inline-block mt-2 w-1/2 pr-1">
+                            <label className="hidden block text-sm" for="cus_email">Email</label>
+                            <input onChange={(e) => setCustomerHandler(e)} className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" name="email" type="email" required placeholder="Email"/>
+                        
+                        </div>
+                        
+                        <div className={"inline-block mt-2 -mx-1 pl-1 w-1/2 " + tooltip} data-tip="Email doesn't match!">
+                            <label className="hidden block text-sm" for="cus_email">Confirm Email</label>
+                            <input onChange={(e) => setCustomerHandler(e)} className="w-full px-2 py-2 text-gray-700 rounded bg-gray-200" name="confirm" type="email" required placeholder="Confirm Email"/>
                         </div>
 
                         <div className="mt-2">
-                            <label className="block text-sm" for="cus_email">Email</label>
-                            <input className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="Email" aria-label="Email"/>
-                            <input className="mt-2 w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="Confirm Email" aria-label="Email"/>
+                            <label className="hidden block text-sm" for="cus_email">Phone</label>
+                            <input onChange={(e) => setCustomerHandler(e)} className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" name="phone" type="tel" placeholder="Phone number"/>
                         </div>
 
                         <div className="mt-2">
-                            <label className=" block text-sm" for="cus_email">Shipping address</label>
-                            <input className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="Street" aria-label="Email"/>
-                            <input className="mt-2 w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="Apartment, suit, etc. (optional)" aria-label="Email"/>
+                            <label className=" block text-sm" for="cus_email">Shipping Address</label>
+                            <input onChange={(e) => setCustomerHandler(e)} className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" name="address" type="text" required placeholder="Street"/>
+                            <input onChange={(e) => setCustomerHandler(e)} className="mt-2 w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" name="detail" type="text" placeholder="Apartment, suit, etc. (optional)"/>
                         </div>
 
                         <div className="inline-block mt-2 w-1/2 pr-1">
                             <label className="hidden block text-sm" for="cus_email">City</label>
-                            <input className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="City" aria-label="Email"/>
+                            <input onChange={(e) => setCustomerHandler(e)} className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" name="city" type="text" required placeholder="City"/>
                         
                         </div>
                         
                         <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
                             <label className="hidden block text-sm" for="cus_email">State</label>
-                            <input className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="cus_email"  name="cus_email" type="text" required="" placeholder="State/province" aria-label="Email"/>
+                            <input onChange={(e) => setCustomerHandler(e)} className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"  name="state" type="text" required placeholder="State/province"/>
                         </div>
 
                         <div className="inline-block mt-2 w-1/2 pr-1">
                             <label className="hidden block text-sm" for="cus_email">Country</label>
-                            <select id="country" name="country" className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded form-control" aria-label="Email">
+                            <select onChange={(e) => setCustomerHandler(e)} name="country" className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded">
                                 <optgroup id="country-optgroup-Africa" label="Africa">
                                     <option value="DZ" label="Algeria">Algeria</option>
                                     <option value="AO" label="Angola">Angola</option>
@@ -311,12 +357,11 @@ const CheckoutForm = () => {
                         
                         <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
                             <label className="hidden block text-sm" for="cus_email">Zip</label>
-                            <input className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="cus_email"  name="cus_email" type="text" required="" placeholder="Postal Code" aria-label="Email"/>
+                            <input onChange={(e) => setCustomerHandler(e)} className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" name="zip" type="text" required placeholder="Postal Code"/>
                         </div>
 
-                        <div className="mt-4">
-                            <button className="px-4 py-1 text-white font-light tracking-wider bg-primary rounded" type="submit">Place order</button>
-                        </div>
+                        <input type="submit"  id="submit-form" class="hidden"/>
+
                     </form>
                 </div>
                 

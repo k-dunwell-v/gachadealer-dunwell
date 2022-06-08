@@ -50,7 +50,7 @@ const NavBarElements = ({dir}) => {
 
             <li>
                 <Link to="/order/">
-                    Order
+                    Track order
                 </Link>
             </li>
 

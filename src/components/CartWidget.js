@@ -24,7 +24,6 @@ const CartWidget = () => {
                     </div>
                 </label>  
                 
-                
             }
 
         </>

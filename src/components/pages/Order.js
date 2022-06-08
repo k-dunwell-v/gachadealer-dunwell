@@ -4,7 +4,7 @@ const Order = () => {
     return (
 
         <>
-            Order
+            My order
         </>
     )
 }
