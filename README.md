@@ -4,7 +4,7 @@ Este es el proyecto final del curso de React JS que ofrece CoderHouse.
 
 GachaDealer es un e-commerce completamente funcional, que permite al usuario checar el catalogo, categorias y cada producto, también puede llenar su carrito y enviar su orden, que después de ser guardada en Firestore, el mismo sitio le retornará su Order ID que puede ser utilizado en la sección "track order" para desplegar los datos de la compra.
 
-Más abajo se encuentran todos los comandos disponibles, para simplemente visualizar el sitio podés clickar [aquí](https://gachadealer.netlify.app), no refreshés la página!
+Más abajo se encuentran todos los comandos disponibles. Para simplemente visitar la tienda, podés clickar [aquí](https://gachadealer.netlify.app), no refreshés la página si usas este link!
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
