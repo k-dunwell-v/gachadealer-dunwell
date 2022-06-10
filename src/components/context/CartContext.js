@@ -1,8 +1,7 @@
 import { createContext, useState } from "react";
 
 
-export function getLocal() {
-
+function getLocal() {
     let localCart = localStorage.getItem("LocalCart")
     localCart = JSON.parse(localCart)
 
@@ -10,8 +9,9 @@ export function getLocal() {
 }
 
 
-export function PushLocal(cart) {
+function PushLocal(cart) {
     localStorage.setItem("LocalCart", JSON.stringify(cart))
+
 }
 
 /////////////////////////////////////////////////////
@@ -29,9 +29,8 @@ export const CartContext = createContext({
 
     cart: [],
     show: [],
-    inCart: [],
     swapShow: () => [],
-    inCartHandler: () => [],
+    inCart: () => [],
     isInCart:() => [],
     addToCart: () => [],
     priceCounter: () => [],
@@ -45,7 +44,6 @@ const CartProvider = ( {children} ) => {
 
     const [cart, setCart] = useState(getLocal() || [])
     const [show, setShow] = useState(false)
-    const [inCart, setInCart] = useState(0)
 
 
     /////////////////////////////////////////
@@ -56,7 +54,7 @@ const CartProvider = ( {children} ) => {
 
 
     /////////////////////////////////////////
-    const inCartHandler = () => {
+    const inCart = () => {
 
         let total = 0
 
@@ -64,7 +62,7 @@ const CartProvider = ( {children} ) => {
             total = total + parseInt(element.quantity);
         });
 
-        setInCart(total)
+        return total
 
     }
 
@@ -94,8 +92,6 @@ const CartProvider = ( {children} ) => {
     const addToCart = ( {item, quantity} ) => {
 
         const { index } = isInCart(item.id)
-
-        console.log(item)
 
         if (index > -1) {
 
@@ -159,11 +155,13 @@ const CartProvider = ( {children} ) => {
 
 
     /////////////////////////////////////////
-    const clearCart = ( ) => {
-        setCart([])
+    const clearCart = () => {
+        setCart(currentCart => {
+        currentCart.splice(0, currentCart.length)
         PushLocal(cart)
-
-
+        return currentCart.concat()
+        })
+        
     }
     /////////////////////////////////////////
 
@@ -171,9 +169,8 @@ const CartProvider = ( {children} ) => {
     const context = {
         cart,
         show,
-        inCart,
         swapShow,
-        inCartHandler,
+        inCart,
         isInCart,
         addToCart,
         priceCounter,

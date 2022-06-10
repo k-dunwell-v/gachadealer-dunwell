@@ -1,6 +1,13 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { collection, addDoc, getFirestore } from "firebase/firestore";
+import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
-const CheckoutForm = (cart) => {
+
+
+const Form = (cart) => {
+
+    const { clearCart } = useContext(CartContext)
 
     const [customer, setCustomer] = useState({
         name: "",
@@ -11,27 +18,49 @@ const CheckoutForm = (cart) => {
         detail: "",
         city: "",
         state: "",
-        country: "United States",
+        country: "Algeria",
         zip: ""
 
+    })
+
+    const [misc, setMisc] = useState({
+        tooltip: "",
+        orderId: ""
     })
 
     function setCustomerHandler(e) {
         setCustomer({...customer, [e.target.name] : e.target.value});
     }
 
-    const [tooltip, setTooltip] = useState("")
+    const placeOrder = async (order) => {
+        const db = getFirestore()
+        const orders = collection(db, "orders")
+
+        const {id} = await addDoc(orders, order)
+
+        setMisc({...misc, 
+            tooltip:"",
+            orderId: id
+        })
+
+    }
 
     function submitHandler(e) {
 
+        e.preventDefault()
+
         if (customer.email === customer.confirm) {
 
-            let order = {customer, cart, order_date: new Date().toISOString().slice(0, 10), tracking: ""}
-            console.log(order)
+            let order = {customer, cart, order_date: new Date().toISOString().slice(0, 10), shipping: "", fee: "", total:"", tracking: ""}
+            
+            placeOrder(order)
+
+            e.currentTarget.reset();
+            
 
         }else{
-            setTooltip(currentTooltip => "tooltip tooltip-open tooltip-bottom tooltip-primary")
-            e.preventDefault()
+            setMisc({...misc, tooltip:"tooltip tooltip-open tooltip-bottom tooltip-primary"})
+
         }
 
         
@@ -40,54 +69,69 @@ const CheckoutForm = (cart) => {
 
     return(
 
-        <div className="w-full bg-neutral text-neutral-content rounded-none p-20">
+        <div className="w-full bg-neutral text-neutral-content rounded-none">
 
             <div className="card-body items-center text-center justify-start">
+
+                {misc.orderId && 
+                
+                    <div className="modal modal-bottom sm:modal-middle modal-open">
+                        <div className="modal-box">
+                            <h3 className="font-bold text-lg">Thank you for your order!</h3>
+                            <p className="py-4">Your order id is: {misc.orderId}, don't lose it!</p>
+                            <span className="py-4">Shipping and fees will be calculated, you will receive an Email from us in up to 48 working hours.</span>
+                            <div className="modal-action">
+                                <Link onClick={() => clearCart()} to="/order" className="btn" >Yay!</Link>
+                            </div>
+                        </div>
+                    </div>
+                
+                }
     
                 <div className="leading-loose">
 
-                    <form className="max-w-xl m-4 p-10 bg-white rounded shadow-xl" action="" onSubmit={(e) => submitHandler(e)}>
+                    <form className="max-w-xl m-4 p-10 bg-white rounded shadow-xl" onSubmit={(e) => submitHandler(e)}>
 
                         <div className="">
-                            <label className="block text-sm" for="cus_name">Personal Information</label>
+                            <label className="block text-sm" htmlFor="cus_name">Personal Information</label>
                             <input onChange={(e) => setCustomerHandler(e)} className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" name="name" type="text" required placeholder="Full Name"/>
                         </div>
 
                         <div className="inline-block mt-2 w-1/2 pr-1">
-                            <label className="hidden block text-sm" for="cus_email">Email</label>
+                            <label className="hidden block text-sm" htmlFor="cus_email">Email</label>
                             <input onChange={(e) => setCustomerHandler(e)} className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" name="email" type="email" required placeholder="Email"/>
                         
                         </div>
                         
-                        <div className={"inline-block mt-2 -mx-1 pl-1 w-1/2 " + tooltip} data-tip="Email doesn't match!">
-                            <label className="hidden block text-sm" for="cus_email">Confirm Email</label>
+                        <div className={"inline-block mt-2 -mx-1 pl-1 w-1/2 " + misc.tooltip} data-tip="Email doesn't match!">
+                            <label className="hidden block text-sm" htmlFor="cus_email">Confirm Email</label>
                             <input onChange={(e) => setCustomerHandler(e)} className="w-full px-2 py-2 text-gray-700 rounded bg-gray-200" name="confirm" type="email" required placeholder="Confirm Email"/>
                         </div>
 
                         <div className="mt-2">
-                            <label className="hidden block text-sm" for="cus_email">Phone</label>
+                            <label className="hidden block text-sm" htmlFor="cus_email">Phone</label>
                             <input onChange={(e) => setCustomerHandler(e)} className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" name="phone" type="tel" placeholder="Phone number"/>
                         </div>
 
                         <div className="mt-2">
-                            <label className=" block text-sm" for="cus_email">Shipping Address</label>
+                            <label className=" block text-sm" htmlFor="cus_email">Shipping Address</label>
                             <input onChange={(e) => setCustomerHandler(e)} className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" name="address" type="text" required placeholder="Street"/>
                             <input onChange={(e) => setCustomerHandler(e)} className="mt-2 w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" name="detail" type="text" placeholder="Apartment, suit, etc. (optional)"/>
                         </div>
 
                         <div className="inline-block mt-2 w-1/2 pr-1">
-                            <label className="hidden block text-sm" for="cus_email">City</label>
+                            <label className="hidden block text-sm" htmlFor="cus_email">City</label>
                             <input onChange={(e) => setCustomerHandler(e)} className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" name="city" type="text" required placeholder="City"/>
                         
                         </div>
                         
                         <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
-                            <label className="hidden block text-sm" for="cus_email">State</label>
+                            <label className="hidden block text-sm" htmlFor="cus_email">State</label>
                             <input onChange={(e) => setCustomerHandler(e)} className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"  name="state" type="text" required placeholder="State/province"/>
                         </div>
 
                         <div className="inline-block mt-2 w-1/2 pr-1">
-                            <label className="hidden block text-sm" for="cus_email">Country</label>
+                            <label className="hidden block text-sm" htmlFor="cus_email">Country</label>
                             <select onChange={(e) => setCustomerHandler(e)} name="country" className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded">
                                 <optgroup id="country-optgroup-Africa" label="Africa">
                                     <option value="DZ" label="Algeria">Algeria</option>
@@ -199,7 +243,7 @@ const CheckoutForm = (cart) => {
                                     <option value="TT" label="Trinidad and Tobago">Trinidad and Tobago</option>
                                     <option value="TC" label="Turks and Caicos Islands">Turks and Caicos Islands</option>
                                     <option value="VI" label="U.S. Virgin Islands">U.S. Virgin Islands</option>
-                                    <option value="US" label="United States" selected="selected">United States</option>
+                                    <option value="US" label="United States">United States</option>
                                     <option value="UY" label="Uruguay">Uruguay</option>
                                     <option value="VE" label="Venezuela">Venezuela</option>
                                 </optgroup>
@@ -356,16 +400,21 @@ const CheckoutForm = (cart) => {
                         </div>
                         
                         <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
-                            <label className="hidden block text-sm" for="cus_email">Zip</label>
+                            <label className="hidden block text-sm" htmlFor="cus_email">Zip</label>
                             <input onChange={(e) => setCustomerHandler(e)} className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" name="zip" type="text" required placeholder="Postal Code"/>
                         </div>
 
-                        <input type="submit"  id="submit-form" class="hidden"/>
+                        <div className="w-full border-gray-200 sm:px-6">
+                            <label htmlFor="submit-form" className="cursor-pointer mt-6 flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-accent hover:text-neutral">
+                                Place order
+                            </label>
+                        </div> 
+                        <input type="submit" id="submit-form" className="hidden"/>
 
                     </form>
+
                 </div>
                 
-
             </div>
 
         </div>
@@ -374,6 +423,6 @@ const CheckoutForm = (cart) => {
     )
 }
 
-export default CheckoutForm
+export default Form
 
             

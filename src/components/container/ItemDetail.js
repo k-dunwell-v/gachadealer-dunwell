@@ -3,7 +3,7 @@ import { CartContext } from "../context/CartContext"
 import ItemCount from "../ItemCount"
 
 
-const ItemDetail = (id, img, title, brand, details, price, stock) => {
+const ItemDetail = ({id, img, title, brand, details, price, stock}) => {
 
     const { swapShow, addToCart, isInCart, deleteFromCart } = useContext(CartContext)
 
@@ -12,13 +12,18 @@ const ItemDetail = (id, img, title, brand, details, price, stock) => {
     function onAdd(quantity) {
 
         if (quantity > 0) {
-
             const updatedPrice = parseInt(price) * quantity
             addToCart({item:{id:id, img: img, title: title, price: updatedPrice}, quantity:quantity})
+            swapShow()
 
-        }else{ index > -1 && deleteFromCart(id) }
-        
-        swapShow()
+        }else{ 
+            
+            if (currentQuantity > 0){
+                deleteFromCart(id)
+                swapShow()
+
+            } 
+        } 
         
     }
 

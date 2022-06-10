@@ -1,46 +1,62 @@
 import { CartContext } from '../context/CartContext'
-import CheckoutForm from "./CheckoutForm";
+import Form from "./Form";
 import { useContext } from 'react';
-import ItemInCart from "../ItemInCart"
-
+import { Link } from "react-router-dom"
+import Brief from './Brief';
 
 const Checkout = () => {
 
-    const { cart, priceCounter } = useContext(CartContext)
+    const { cart, priceCounter, clearCart } = useContext(CartContext)
 
     return (
 
-        <div className="flex flex-col w-full lg:flex-row h-full" data-theme="acid">
+        <>
+            {cart.length === 0 ?
 
-            <div className="grid flex-grow w-full">
-                <CheckoutForm cart={cart} total={priceCounter()}/>
-            </div>
-
-            <div className="grid place-items-start m-10 pt-10">
-                
-                <ul role="list" className="-my-6 divide-y divide-gray-200 h-full  overflow-y-scroll pr-10 w-full" style={{maxHeight: 400 + "px"}}>
-
-                    {cart.map(product => ItemInCart(product["item"].id, product["item"].img, product["item"].title, product["item"].price, product.quantity))}
+                <div className="bg-neutral" style={{height: 600 + "px"}} data-theme="acid">
+        
+                    <div className="flex justify-center px-4 py-60 text-white text-2xl">
                     
-                </ul>
+                        You shouldn't be here... {''}
+        
+                        <Link to="/categories"
+                        type="button"
+                        className="font-medium text-primary hover:text-accent">
+                            Come with me <span aria-hidden="true"> :)</span>
+                        </Link>
+        
+                    </div>
+        
+                </div> 
+                
+                :
 
-                <div className="border-t w-full border-gray-200 sm:px-6">
+                <div className="flex flex-col w-full lg:flex-row h-full" data-theme="acid">
 
-                    <div className="flex text-xl font-medium text-gray-900 mt-10">
-                        <p>{"Subtotal: $" + priceCounter()}</p>
+                    <div className="grid flex-grow w-full">
+                        <Form products={cart} subtotal={priceCounter()}/>
                     </div>
 
-                    <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+                    <div className="grid place-items-start m-10 pt-10">
+                        
+                        <Brief cart={cart} subtotal={priceCounter()} remove={true}>
+                            <p className="mt-0.5 text-sm text-gray-500">Shipping and P&P fees are not included.</p>
 
-                    <label for="submit-form" className="mt-6 flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-accent hover:text-neutral">
-                        Checkout
-                    </label>
+                            <p className="mt-0.5 text-sm text-gray-500 mt-5">For further information about shipping methods and rates, {""}
+                            
+                                <Link to="/shipping/" className='text-primary font-semibold'>click here.</Link>
+                            
+                            </p>
+                        </Brief>
+                    
+                    </div> 
 
                 </div>
-            
-            </div> 
 
-        </div>
+            }
+
+            
+        </>
 
     )
 

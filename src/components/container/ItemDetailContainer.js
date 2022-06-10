@@ -20,19 +20,20 @@ const ItemDetailContainer= () => {
 
             if (result.exists()) {
 
-                setProduct([{"id":result.id, ... result.data()}])
+                setProduct({"id":result.id, ... result.data()})
+
 
             }else{
-                setProduct([{
+                setProduct({
                     "id":"000",
                     "img": "https://dummyimage.com/900x900/ebebeb/8c8c8c.jpg&text=(」°ロ°)」",
                     "title":"Huh?",
                     "brand":"Huh?!",
                     "details":"How did you get here?!	(・・;)ゞ",
                     "price":"free",
-                    "stock":"0"
+                    "stock":0
 
-                }])
+                })
             }
 
         })
@@ -43,7 +44,15 @@ const ItemDetailContainer= () => {
 
         <div>
 
-            {product.map ( merch => ItemDetail(merch.id, merch.img, merch.title, merch.brand, merch.details, merch.price, merch.stock))}
+            <ItemDetail 
+                id={product.id} 
+                img={product.img} 
+                title={product.title} 
+                brand={product.brand} 
+                details={product.details} 
+                price={product.price} 
+                stock={product.stock}
+            />
 
         </div>
 

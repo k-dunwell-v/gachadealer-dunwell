@@ -6,7 +6,8 @@ import ItemDetailContainer from './components/container/ItemDetailContainer';
 import Order from './components/pages/Order';
 import Shipping from './components/pages/Shipping';
 import CartProvider from './components/context/CartContext';
-import CheckoutContainer from './components/checkout/CheckoutContainer';
+import Footer from './components/Footer';
+import Checkout from './components/checkout/Checkout';
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
   return (
 
     <CartProvider>
-
+      
       <BrowserRouter>
 
         <NavBar/>
@@ -33,9 +34,11 @@ function App() {
 
           <Route path='/shipping/' element={<Shipping/>}/>
 
-          <Route path='/cart/' element={<CheckoutContainer/>}/>
+          <Route path='/cart/' element={<Checkout/>}/>
 
         </Routes>
+
+        <Footer></Footer>
 
       </BrowserRouter>
 

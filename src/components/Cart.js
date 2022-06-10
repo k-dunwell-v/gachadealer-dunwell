@@ -1,7 +1,7 @@
-import { createContext, Fragment, useContext, useState } from 'react'
+import { Fragment, useContext, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
-import {CartContext, getLocal } from './context/CartContext'
+import {CartContext} from './context/CartContext'
 import { Link } from "react-router-dom"
 import ItemInCart from './ItemInCart'
 
@@ -10,8 +10,6 @@ import ItemInCart from './ItemInCart'
 const Cart = () => {
 
 	const {clearCart, swapShow, show, cart, priceCounter} = useContext(CartContext)
-
-
 
     return (
       	<>
@@ -45,7 +43,7 @@ const Cart = () => {
 
 									<Dialog.Panel className="pointer-events-auto w-screen max-w-md">
 
-										<div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+										<div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl" data-theme="acid">
 
 											<div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
 
@@ -82,7 +80,7 @@ const Cart = () => {
 																</p>
 															</div>}
 
-														  	{cart.map(product => ItemInCart(product["item"].id, product["item"].img, product["item"].title, product["item"].price, product.quantity))}
+														  	{cart.map(product => ItemInCart(product["item"].id, product["item"].img, product["item"].title, product["item"].price, product.quantity, true))}
 
 														</ul>
 													</div>
@@ -94,7 +92,7 @@ const Cart = () => {
 													
 												<button
 													type="button"
-													className="text-lg text-red-600 hover:text-red-500"
+													className="w-full text-lg text-red-600 hover:text-red-500 bg-red-100 hover:bg-red-300"
 													onClick={() => clearCart()}>
 													Clear cart
 												</button>
@@ -108,11 +106,11 @@ const Cart = () => {
 													<p>Subtotal</p>
 													<p>{"$" + priceCounter()}</p>
 												</div>
-												<p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+
 												<div className="mt-6">
 													<Link
 													to="/cart/"
-													className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+													className="flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-white shadow-sm bg-primary hover:bg-accent hover:text-neutral"
 													onClick={() => swapShow()}
 													>
 													Checkout
@@ -124,7 +122,7 @@ const Cart = () => {
 													or{' '}
 													<button
 														type="button"
-														className="font-medium text-indigo-600 hover:text-indigo-500"
+														className="font-medium text-primary hover:text-neutral"
 														onClick={() => swapShow()}
 													>
 														Continue Shopping<span aria-hidden="true"> &rarr;</span>
