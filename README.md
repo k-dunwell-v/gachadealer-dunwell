@@ -1,4 +1,9 @@
-# GachaDealer Store!
+# GachaDealer!
+
+Este es el proyecto final del curso de React JS que ofrece CoderHouse.
+
+Más abajo se encuentran todos los comandos disponibles, para simplemente visualizar el sitio podés clickar [aquí](https://gachadealer.netlify.app), no refreshés la página!
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
