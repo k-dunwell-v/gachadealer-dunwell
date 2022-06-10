@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# GachaDealer Store!
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+ESP// Otros Frameworks implementados fueron [Tailwind](https://tailwindcss.com) y [DaisyUI](https://daisyui.com), con el fin de crear un proyecto de forma agil y facilitar la cohesión entre componentes, pues comparten el tema "acid" (DaisyUI), creando una mejor experiencia visual para el usuario.
 
 ## Available Scripts
 
